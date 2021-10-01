@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import axios from 'axios'
 
-
 const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
     const [checked, setChecked] = useState(false)
     const [editTodo, setEditTodo] = useState({
@@ -10,8 +9,6 @@ const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
         todo: todo.todo,
         completed: todo.completed
     })
-
-
 
     const handleDeleteTodo = async (id) => {
         const res = await axios.delete(`todo/${id}`)
@@ -26,9 +23,12 @@ const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
         setEditTodo({ ...editTodo, completed: checked })
         const res = await axios.put(`todo/${id}`, editTodo)
         console.log('EDITED TODO', res)
-        setTodos([...todos, res])
-        fetchTodos()
+
     }
+
+    useEffect(() => {
+        fetchTodos()
+    }, [checked, editTodo])
 
     return (
         <div key={todo.id} className={todo.completed ? 'Todo checked' : 'Todo not-checked'}>

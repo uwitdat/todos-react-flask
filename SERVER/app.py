@@ -9,9 +9,12 @@ app = Flask(__name__)
 # LET SERVER KNOW WHERE TO LOCATE DATABASE
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-# SET UP DATABASE
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-    os.path.join(basedir, 'db.sqlite')
+# SET UP DATABASE SQLITE
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+#     os.path.join(basedir, 'db.sqlite')
+
+# SET UP DATABASE POSTGRESQL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
 # STOP CONSOLE COMPLAINTS
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
