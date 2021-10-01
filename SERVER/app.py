@@ -111,9 +111,10 @@ def delete_todo(id):
 
 # CREATE BASIC ROUTE
 
-# @app.route('/', methods=['DELETE'])
-# def get():
-#     return 'TEST'
+
+@app.route('/', methods=['GET'])
+def get():
+    return 'WELCOME TO MY FLASK SERVER'
 
 
 # RUN SERVER
