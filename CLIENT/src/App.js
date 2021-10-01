@@ -45,14 +45,14 @@ function App() {
           type='text'
           value={newTodo.todo}
           onChange={(e) => setNewTodo({ ...newTodo, todo: e.target.value })}
-          placeholder='Enter a new todo'
+          placeholder='Add a new todo'
           required={true}
         />
         <button
           type='submit'
           className='btn'
         >
-          Add Todo</button>
+          Add </button>
       </form>
     </div>
   );
