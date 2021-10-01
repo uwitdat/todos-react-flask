@@ -1,0 +1,94 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.Todo {
+  width: 20rem;
+  margin: 1rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Todo > h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.Todo-check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Todo-check > p {
+  font-style: italic;
+}
+
+#completed {
+  margin-right: 1rem;
+}
+
+.not-checked {
+  border-left: 7px solid red;
+  transition: all 200ms;
+}
+
+.checked {
+  border-left: 7px solid green;
+  transition: all 200ms;
+}
+
+.input {
+  width: 20rem;
+  display: block;
+  padding: 0.5rem;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+.btn {
+  margin-bottom: 5rem;
+  margin-top: 1rem;
+  padding: 0.7rem;
+  width: 21rem;
+  border-radius: 20px;
+  background-color: green;
+  border: transparent;
+  color: white;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.Icon {
+  font-size: 1.5rem;
+  color: rgb(66, 66, 66);
+  transition: all 300ms;
+}
+.Icon:hover {
+  transform: rotate(10deg);
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
