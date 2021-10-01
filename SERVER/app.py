@@ -80,10 +80,6 @@ def get_todo(id):
     return todo_schema.jsonify(todo)
 
 
-# RUN SERVER
-if __name__ == '__main__':
-    app.run(debug=True)
-
 # UPDATE ONE
 
 
@@ -112,8 +108,17 @@ def delete_todo(id):
     return todo_schema.jsonify(todo)
 
 
+# @app.route('/test', methods=['GET'])
+# def api():
+#     return 'Deleted...'
+
 # CREATE BASIC ROUTE
 
-# @app.route('/', methods=['GET'])
+# @app.route('/', methods=['DELETE'])
 # def get():
-#    return jsonify({'msg': 'Hello World'})
+#     return 'TEST'
+
+
+# RUN SERVER
+if __name__ == '__main__':
+    app.run(debug=True)

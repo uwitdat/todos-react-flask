@@ -10,13 +10,14 @@ function App() {
     completed: false
   })
 
+  const fetchTodos = async () => {
+    const res = await axios.get('/todo')
+    setTodos(res.data)
+  }
+
   useEffect(() => {
-    const fetchTodos = async () => {
-      const res = await axios.get('/todo')
-      setTodos(res.data)
-    }
     fetchTodos()
-  }, [todos])
+  }, [])
 
 
   const handleAddTodo = async (e) => {
@@ -24,6 +25,7 @@ function App() {
     const res = await axios.post('/todo', newTodo)
     console.log('NEW TODO: ', res)
     setTodos([...todos, res])
+    fetchTodos()
     setNewTodo({
       todo: '',
       completed: false
@@ -35,7 +37,7 @@ function App() {
       <h1 style={{ marginBottom: '2rem' }}>TODOS WITH FLASK API</h1>
       {todos.map((todo) => (
         <div key={todo.id}>
-          <Checker key={todo.id} todo={todo} />
+          <Checker key={todo.id} todo={todo} todos={todos} setTodos={setTodos} fetchTodos={fetchTodos} />
         </div>
 
       ))}
