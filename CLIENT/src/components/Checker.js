@@ -15,7 +15,7 @@ const Checker = ({ todo }) => {
                     name="completed"
                     value={checked}
                     onChange={() => setChecked(!checked)} />
-                {todo.completed ? <p>Done</p> : <p>Not Done</p>}
+                {todo.completed ? <><p>Done</p><span style={{ marginLeft: '.5rem', color: 'green' }}>&#10004;</span></> : <><p>Not Done</p><span style={{ marginLeft: '.5rem', color: 'red' }}>&#10005;</span></>}
             </div>
             <p style={{ marginTop: '1rem' }}><AiFillDelete className='Icon' /></p>
         </div>
