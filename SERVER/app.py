@@ -87,16 +87,15 @@ def get_todo(id):
 def update_todo(id):
     todo = Todo.query.get(id)
 
-    todo = request.json['todo']
-    completed = request.json['completed']
+    todo_value = request.json['todo']
+    completed_value = request.json['completed']
 
-    todo.todo = todo
-    todo.completed = completed
+    todo.todo = todo_value
+    todo.completed = completed_value
 
     db.session.commit()
 
     return todo_schema.jsonify(todo)
-
 # DELETE ONE
 
 
@@ -106,11 +105,6 @@ def delete_todo(id):
     db.session.delete(todo)
     db.session.commit()
     return todo_schema.jsonify(todo)
-
-
-# @app.route('/test', methods=['GET'])
-# def api():
-#     return 'Deleted...'
 
 # CREATE BASIC ROUTE
 
