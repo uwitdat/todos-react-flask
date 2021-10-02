@@ -44,6 +44,7 @@ class Todo(db.Model):
 class TodoSchema(ma.Schema):
     class Meta:
         fields = ('id', 'todo', 'completed')
+        # ordered = True
 
 
 # INIT SCHEMA(S)
@@ -70,7 +71,8 @@ def add_todo():
 
 @app.route('/todo', methods=['GET'])
 def get_todos():
-    all_todos = Todo.query.all()
+    # all_todos = Todo.query.all().order_by(None)
+    all_todos = Todo.query.filter().order_by('todo')
     result = todos_schema.dump(all_todos)
     return jsonify(result)
 

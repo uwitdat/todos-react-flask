@@ -35,12 +35,15 @@ function App() {
   return (
     <div className="App">
       <h1 style={{ marginBottom: '2rem' }}>TODOS WITH FLASK API</h1>
-      {todos.map((todo) => (
-        <div key={todo.id}>
-          <Checker key={todo.id} todo={todo} todos={todos} setTodos={setTodos} fetchTodos={fetchTodos} />
-        </div>
+      {todos.length === 0 ? <h2>Add your first Todo</h2> : (
+        todos.map((todo) => (
+          <div key={todo.id}>
+            <Checker key={todo.id} todo={todo} todos={todos} setTodos={setTodos} fetchTodos={fetchTodos} />
+          </div>
 
-      ))}
+        ))
+      )}
+
       <form onSubmit={handleAddTodo}>
         <input
           className='input'
