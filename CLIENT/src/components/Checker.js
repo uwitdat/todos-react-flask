@@ -18,8 +18,6 @@ const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
         fetchTodos()
     }
 
-
-
     useEffect(() => {
         const handleEdit = async () => {
             if (todo.id === undefined) {
@@ -38,6 +36,7 @@ const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
     return (
         <div key={todo.id} className={editTodo.completed ? 'Todo checked' : 'Todo not-checked'}>
             <h3>{todo.todo}</h3>
+            <p className='date-added'>{todo.date_added}</p>
             <div className='Todo-check'>
                 <form>
                     <input
@@ -51,7 +50,7 @@ const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
                 </form>
                 {todo.completed ? <><p>Done</p><span style={{ marginLeft: '.5rem', color: 'green' }}>&#10004;</span></> : <><p>Not Done</p><span style={{ marginLeft: '.5rem', color: 'red' }}>&#10005;</span></>}
             </div>
-            <p style={{ marginTop: '1rem' }}><AiFillDelete className='Icon' onClick={() => handleDeleteTodo(todo.id)} /></p>
+            <p style={{ marginTop: '.5rem' }}><AiFillDelete className='Icon' onClick={() => handleDeleteTodo(todo.id)} /></p>
         </div>
     )
 }

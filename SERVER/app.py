@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate
 import os
 
 # INITALIZE APP
@@ -21,6 +22,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # INITALIZE DB
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # INITALIZE MARSHMALLOW
 ma = Marshmallow(app)
@@ -32,10 +34,12 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     todo = db.Column(db.String(100), nullable=False)
     completed = db.Column(db.Boolean, default=False)
+    date_added = db.Column(db.String(100), default='')
 
-    def __init__(self, todo, completed):
+    def __init__(self, todo, completed, date_added):
         self.todo = todo
         self.completed = completed
+        self.date_added = date_added
 
 
 # SCHEMA
@@ -43,7 +47,7 @@ class Todo(db.Model):
 
 class TodoSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'todo', 'completed')
+        fields = ('id', 'todo', 'completed', 'date_added')
         # ordered = True
 
 
@@ -58,8 +62,9 @@ todos_schema = TodoSchema(many=True)
 def add_todo():
     todo = request.json['todo']
     completed = request.json['completed']
+    date_added = request.json['date_added']
 
-    new_todo = Todo(todo, completed)
+    new_todo = Todo(todo, completed, date_added)
 
     db.session.add(new_todo)
     db.session.commit()

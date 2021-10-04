@@ -2,12 +2,15 @@ import './App.css';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Checker from './components/Checker';
+import moment from 'moment'
 
 function App() {
   const [todos, setTodos] = useState([])
+
   const [newTodo, setNewTodo] = useState({
     todo: '',
-    completed: false
+    completed: false,
+    date_added: ''
   })
 
   const fetchTodos = async () => {
@@ -32,6 +35,15 @@ function App() {
     })
   }
 
+  const createDate = () => {
+    let newDate = new Date()
+    return moment(newDate).format('MMMM Do YYYY')
+  }
+
+  const handleOnChange = (e) => {
+    setNewTodo({ ...newTodo, todo: e.target.value, date_added: createDate() })
+  }
+
   return (
     <div className="App">
       <h1 style={{ marginBottom: '2rem' }}>TODOS WITH FLASK API</h1>
@@ -49,7 +61,7 @@ function App() {
           className='input'
           type='text'
           value={newTodo.todo}
-          onChange={(e) => setNewTodo({ ...newTodo, todo: e.target.value })}
+          onChange={(e) => handleOnChange(e)}
           placeholder='Add a new todo'
           required={true}
         />
