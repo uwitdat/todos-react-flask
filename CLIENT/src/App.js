@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Checker from './components/Checker';
 import moment from 'moment'
+import Loader from './components/Loader'
 
 function App() {
   const [todos, setTodos] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const [newTodo, setNewTodo] = useState({
     todo: '',
@@ -20,6 +22,9 @@ function App() {
 
   useEffect(() => {
     fetchTodos()
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
   }, [])
 
 
@@ -37,7 +42,7 @@ function App() {
 
   const createDate = () => {
     let newDate = new Date()
-    return moment(newDate).format('MMMM Do YYYY')
+    return moment(newDate).format('MMMM Do YYYY, h:mm A')
   }
 
   const handleOnChange = (e) => {
@@ -47,10 +52,12 @@ function App() {
   return (
     <div className="App">
       <h1 style={{ marginBottom: '2rem' }}>TODOS WITH FLASK API</h1>
+
+
       {todos.length === 0 ? <h2>Add your first Todo</h2> : (
         todos.map((todo) => (
           <div key={todo.id}>
-            <Checker key={todo.id} todo={todo} todos={todos} setTodos={setTodos} fetchTodos={fetchTodos} />
+            <Checker key={todo.id} todo={todo} todos={todos} setTodos={setTodos} fetchTodos={fetchTodos} loading={loading} />
           </div>
 
         ))

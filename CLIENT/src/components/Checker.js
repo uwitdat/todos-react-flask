@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import axios from 'axios'
+import Loader from './Loader'
 
-const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
+const Checker = ({ todo, todos, setTodos, fetchTodos, loading }) => {
 
     const [editTodo, setEditTodo] = useState({
         id: todo.id,
@@ -34,23 +35,33 @@ const Checker = ({ todo, todos, setTodos, fetchTodos }) => {
 
 
     return (
-        <div key={todo.id} className={editTodo.completed ? 'Todo checked' : 'Todo not-checked'}>
-            <h3>{todo.todo}</h3>
-            <p className='date-added'>{todo.date_added}</p>
-            <div className='Todo-check'>
-                <form>
-                    <input
-                        type="checkbox"
-                        id="completed"
-                        checked={editTodo.completed ? true : false}
-                        name="completed"
-                        value={editTodo.completed}
-                        onChange={() => setEditTodo({ ...editTodo, completed: !editTodo.completed })}
-                    />
-                </form>
-                {todo.completed ? <><p>Done</p><span style={{ marginLeft: '.5rem', color: 'green' }}>&#10004;</span></> : <><p>Not Done</p><span style={{ marginLeft: '.5rem', color: 'red' }}>&#10005;</span></>}
-            </div>
-            <p style={{ marginTop: '.5rem' }}><AiFillDelete className='Icon' onClick={() => handleDeleteTodo(todo.id)} /></p>
+        <div>
+            {loading ? (
+                <div key={todo.id} className='Todo'>
+                    <Loader />
+                </div>
+            ) : (
+                <div className={editTodo.completed ? 'Todo checked' : 'Todo not-checked'}>
+                    <h3>{todo.todo}</h3>
+                    <p className='date-added'>{todo.date_added}</p>
+                    <div className='Todo-check'>
+                        <form>
+                            <input
+                                type="checkbox"
+                                id="completed"
+                                checked={editTodo.completed ? true : false}
+                                name="completed"
+                                value={editTodo.completed}
+                                onChange={() => setEditTodo({ ...editTodo, completed: !editTodo.completed })}
+                            />
+                        </form>
+                        {editTodo.completed ? <><p>Done</p><span style={{ marginLeft: '.5rem', color: 'green' }}>&#10004;</span></> : <><p>Not Done</p><span style={{ marginLeft: '.5rem', color: 'red' }}>&#10005;</span></>}
+                    </div>
+                    <p style={{ marginTop: '.5rem' }}><AiFillDelete className='Icon' onClick={() => handleDeleteTodo(todo.id)} /></p>
+                </div>
+            )}
+
+
         </div>
     )
 }
